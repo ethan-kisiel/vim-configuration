@@ -53,40 +53,23 @@ nnoremap <leader>r :!sh ~/runCPP.sh % output<CR>
 " turn spelling off or on
 " correct
 nnoremap <leader>s :setlocal spell!<CR>
-
+"space j and k to move tabs
+nnoremap <leader>j :tabprevious<CR>
+nnoremap <leader>k :tabnext<CR>
 " These two clipboard functions only yank and put to primary X11 clipboard
 " yank too system clipboard
 nnoremap <leader>y "*y
 "Put from system clipboard
 nnoremap <leader>p "*p
 
-nnoremap <leader>sh <Esc>:syntax sync clear<CR> 
 
-" leader cf to create a file (DANGEROUS, overwrites)
-" nnoremap <silent> <leader>cf :call writefile([], expand("<cfile>"), "t")<cr>
-
-"install vimplug
-"Should work on not using plugins to  be honest
-
-
-
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
-endif
 
 call plug#begin('~/.vim/plugged')
-
 Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
-
-Plug 'pearofducks/ansible-vim'
-
-"Plug 'lervag/vimtex'
 
 Plug 'chikamichi/mediawiki.vim'
 
-Plug 'flazz/vim-colorschemes'
+Plug 'arzg/vim-colors-xcode'
 
 Plug 'https://github.com/nathanaelkane/vim-indent-guides'
 
@@ -94,47 +77,31 @@ Plug 'https://github.com/machakann/vim-highlightedyank'
 
 Plug 'https://github.com/junegunn/goyo.vim'
 
-Plug 'diepm/vim-rest-console'
-
 Plug 'scrooloose/nerdtree'
 
 Plug 'https://github.com/hashivim/vim-terraform.git'
 
-Plug 'https://github.com/tweekmonster/django-plus.vim'
-
-Plug 'https://github.com/pangloss/vim-javascript'
-
-
-
+Plug 'dracula/vim', { 'as': 'dracula' }
 call plug#end()
 
-" Spell check syntax highliting
- 
-let g:gruvbox_guisp_fallback = "bg"
-
- 
-"needed for italics, only works in some terminals
-let g:gruvbox_italic=1 
-"change to the change coloursheme to whaever I prefer at the time 
-colorscheme gruvbox
+colorscheme dracula
 set background=dark
-"not sure if this is needed or not, or even if it works. Might just be default
-"iunno lol
-set statusline=%F[%L][%{&ff}]%y[%04l,%04v]
-
-
-"hide the options in gvim
-set guioptions=aci
 
 "spelling 
 setlocal spell spelllang=en_us
 setlocal spell!
 
-"Abbreviation
-
-ab gt ✅
-nnoremap <leader>dt :put=strftime('@@%Y-%m-%d')<CR>
+" double press i to leave
 map! ii <Esc>
+
+" auto-close braces simple
+inoremap " ""<left>
+inoremap ' ''<left>
+"inoremap ( ()<left>
+inoremap [ []<left>
+inoremap { {<return><tab><return>}<left>
+
+
 
 "vim file browser remove banner
 let g:netrw_banner = 0
@@ -150,4 +117,3 @@ hi link markdownError Normal
 
 " This stops that stupid error window popping up everywhere on every buffer
 let g:pymode_lint_cwindow = 0
-
